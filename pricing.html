@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH SMART | Pricing</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d;
+            --secondary: #0a0a0a;
+            --accent: #00b4ff;
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Pricing Section Styles */
+        .pricing-section {
+            padding: 8rem 5% 5rem;
+            position: relative;
+            overflow: hidden;
+            background: rgba(10, 10, 10, 0.85);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .section-title h2 span {
+            color: var(--accent);
+            background: none;
+            -webkit-text-fill-color: var(--accent);
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            color: var(--secondary);
+        }
+
+        .tab-btn.active::before, .tab-btn:hover::before {
+            opacity: 1;
+        }
+
+        .pricing-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-grid.active {
+            display: grid;
+        }
+
+        .pricing-card {
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .price::before {
+            content: 'GHS ';
+        }
+
+        .features {
+            margin-bottom: 2rem;
+        }
+
+        .features li {
+            list-style: none;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .features i {
+            color: var(--primary);
+        }
+
+        .brands-section {
+            margin-top: 5rem;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .brand-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 5px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        .brand-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .brand-card img {
+            max-width: 100%;
+            height: auto;
+            filter: grayscale(100%) brightness(1.5);
+            transition: filter 0.3s ease;
+        }
+
+        .brand-card:hover img {
+            filter: grayscale(0) brightness(1);
+        }
+
+        .brand-card p {
+            margin-top: 1rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .brands-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--primary);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Video Background -->
+    <video autoplay muted loop class="video-background">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-technician-fixing-a-mobile-phone-43742-large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Animated Circuit Nodes -->
+    <div id="circuitNodes"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">EMOTECH</div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="contact.html">CONTACT</a>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>REPAIR <span>PRICING</span></h2>
+                <p>Transparent pricing for all our premium repair services in Ghana Cedis (GHS)</p>
+            </div>
+            
+            <div class="pricing-tabs">
+                <button class="tab-btn active" data-tab="smartphone">Smartphones</button>
+                <button class="tab-btn" data-tab="laptop">Laptops</button>
+                <button class="tab-btn" data-tab="console">Gaming Consoles</button>
+            </div>
+            
+            <!-- Smartphones Tab -->
+            <div class="pricing-grid active" id="smartphone-tab">
+                <div class="pricing-card">
+                    <h3>Screen Replacement</h3>
+                    <div class="price">50 to 100</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> OEM-quality displays</li>
+                        <li><i class="fas fa-check"></i> 1-year warranty</li>
+                        <li><i class="fas fa-check"></i> 30-minute service</li>
+                    </ul>
+                    <a href="schedule.html?service=screen" class="btn">BOOK NOW</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="featured-badge">POPULAR</div>
+                    <h3>Battery Replacement</h3>
+                    <div class="price">20</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> High-capacity batteries</li>
+                        <li><i class="fas fa-check"></i> 18-month warranty</li>
+                        <li><i class="fas fa-check"></i> 20-minute service</li>
+                    </ul>
+                    <a href="schedule.html?service=battery" class="btn">BOOK NOW</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Water Damage Repair</h3>
+                    <div class="price"> 50 to 1,200</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Ultrasonic cleaning</li>
+                        <li><i class="fas fa-check"></i> Corrosion treatment</li>
+                        <li><i class="fas fa-check"></i> Data recovery included</li>
+                    </ul>
+                    <a href="schedule.html?service=water" class="btn">BOOK NOW</a>
+                </div>
+            </div>
+            
+            <!-- Laptops Tab -->
+            <div class="pricing-grid" id="laptop-tab">
+                <div class="pricing-card">
+                    <h3>Screen Replacement</h3>
+                    <div class="price">50</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> High-resolution panels</li>
+                        <li><i class="fas fa-check"></i> 1-year warranty</li>
+                        <li><i class="fas fa-check"></i> 1-hour service</li>
+                    </ul>
+                    <a href="schedule.html?service=laptop-screen" class="btn">BOOK NOW</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="featured-badge">POPULAR</div>
+                    <h3>Keyboard Replacement</h3>
+                    <div class="price">50</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Original manufacturer parts</li>
+                        <li><i class="fas fa-check"></i> 18-month warranty</li>
+                        <li><i class="fas fa-check"></i> 45-minute service</li>
+                    </ul>
+                    <a href="schedule.html?service=keyboard" class="btn">BOOK NOW</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Motherboard Repair</h3>
+                    <div class="price">1,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Component-level repair</li>
+                        <li><i class="fas fa-check"></i> 2-year warranty</li>
+                        <li><i class="fas fa-check"></i> Data preservation</li>
+                    </ul>
+                    <a href="schedule.html?service=motherboard" class="btn">BOOK NOW</a>
+                </div>
+            </div>
+            
+            <!-- Consoles Tab -->
+            <div class="pricing-grid" id="console-tab">
+                <div class="pricing-card">
+                    <h3>HDMI Port Repair</h3>
+                    <div class="price">1,200</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> High-quality connectors</li>
+                        <li><i class="fas fa-check"></i> 1-year warranty</li>
+                        <li><i class="fas fa-check"></i> 1-hour service</li>
+                    </ul>
+                    <a href="schedule.html?service=hdmi" class="btn">BOOK NOW</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="featured-badge">POPULAR</div>
+                    <h3>Laser Lens Replacement</h3>
+                    <div class="price">800</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> High-precision optics</li>
+                        <li><i class="fas fa-check"></i> 18-month warranty</li>
+                        <li><i class="fas fa-check"></i> 45-minute service</li>
+                    </ul>
+                    <a href="schedule.html?service=lens" class="btn">BOOK NOW</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Overheating Fix</h3>
+                    <div class="price">700</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Thermal paste replacement</li>
+                        <li><i class="fas fa-check"></i> Fan cleaning/repair</li>
+                        <li><i class="fas fa-check"></i> Performance optimization</li>
+                    </ul>
+                    <a href="schedule.html?service=overheating" class="btn">BOOK NOW</a>
+                </div>
+            </div>
+            
+            <!-- Phone Brands Section -->
+            <div class="brands-section">
+                <div class="section-title">
+                    <h2>SMARTPHONE <span>BRANDS</span></h2>
+                    <p>Expert service for every major smartphone manufacturer</p>
+                </div>
+                
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png" alt="Apple" style="max-height: 40px;">
+                        <p>iPhone</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" alt="Samsung" style="max-height: 20px;">
+                        <p>Samsung</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Huawei_logo_2019.svg/2560px-Huawei_logo_2019.svg.png" alt="Huawei" style="max-height: 25px;">
+                        <p>Huawei</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Xiaomi_logo_%282021-%29.svg/2048px-Xiaomi_logo_%282021-%29.svg.png" alt="Xiaomi" style="max-height: 25px;">
+                        <p>Xiaomi</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Oppo_Logo_2019.svg/2560px-Oppo_Logo_2019.svg.png" alt="Oppo" style="max-height: 25px;">
+                        <p>Oppo</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vivo_Logo_2019.svg/2560px-Vivo_Logo_2019.svg.png" alt="Vivo" style="max-height: 25px;">
+                        <p>Vivo</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/OnePlus_logo.svg/2560px-OnePlus_logo.svg.png" alt="OnePlus" style="max-height: 20px;">
+                        <p>OnePlus</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Tecno_Mobile_logo.png/800px-Tecno_Mobile_logo.png" alt="Tecno" style="max-height: 20px;">
+                        <p>Tecno</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Infinix_Mobility_logo.png/800px-Infinix_Mobility_logo.png" alt="Infinix" style="max-height: 20px;">
+                        <p>Infinix</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Nokia_2011_logo.svg/2560px-Nokia_2011_logo.svg.png" alt="Nokia" style="max-height: 20px;">
+                        <p>Nokia</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sony_Xperia_logo.svg/2560px-Sony_Xperia_logo.svg.png" alt="Sony" style="max-height: 20px;">
+                        <p>Sony</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Google_pixel_logo.png/800px-Google_pixel_logo.png" alt="Google Pixel" style="max-height: 20px;">
+                        <p>Google Pixel</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Laptop Brands Section -->
+            <div class="brands-section">
+                <div class="section-title">
+                    <h2>LAPTOP <span>BRANDS</span></h2>
+                    <p>Professional repair services for all major laptop manufacturers</p>
+                </div>
+                
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Apple_Computer_Logo_rainbow.svg/800px-Apple_Computer_Logo_rainbow.svg.png" alt="Apple" style="max-height: 30px;">
+                        <p>MacBook</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Dell_logo_2016.svg/2560px-Dell_logo_2016.svg.png" alt="Dell" style="max-height: 20px;">
+                        <p>Dell</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/HP_logo_2012.svg/2560px-HP_logo_2012.svg.png" alt="HP" style="max-height: 25px;">
+                        <p>HP</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Lenovo_logo_2015.svg/2560px-Lenovo_logo_2015.svg.png" alt="Lenovo" style="max-height: 25px;">
+                        <p>Lenovo</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Asus_logo_2016.svg/2560px-Asus_logo_2016.svg.png" alt="Asus" style="max-height: 20px;">
+                        <p>Asus</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Acer_2011_logo.svg/2560px-Acer_2011_logo.svg.png" alt="Acer" style="max-height: 20px;">
+                        <p>Acer</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/MSI_logo.svg/2560px-MSI_logo.svg.png" alt="MSI" style="max-height: 20px;">
+                        <p>MSI</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Microsoft_logo.svg/2560px-Microsoft_logo.svg.png" alt="Microsoft" style="max-height: 20px;">
+                        <p>Surface</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Razer_logo.svg/2560px-Razer_logo.svg.png" alt="Razer" style="max-height: 20px;">
+                        <p>Razer</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Alienware_logo.svg/2560px-Alienware_logo.svg.png" alt="Alienware" style="max-height: 20px;">
+                        <p>Alienware</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Toshiba_logo.svg/2560px-Toshiba_logo.svg.png" alt="Toshiba" style="max-height: 20px;">
+                        <p>Toshiba</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" alt="Samsung" style="max-height: 20px;">
+                        <p>Samsung</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Console Brands Section -->
+            <div class="brands-section">
+                <div class="section-title">
+                    <h2>GAMING <span>CONSOLES</span></h2>
+                    <p>Specialized repair for all gaming platforms</p>
+                </div>
+                
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/PlayStation_logo.svg/2560px-PlayStation_logo.svg.png" alt="PlayStation" style="max-height: 30px;">
+                        <p>PlayStation</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/2560px-Xbox_one_logo.svg.png" alt="Xbox" style="max-height: 20px;">
+                        <p>Xbox</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/2560px-Nintendo.svg.png" alt="Nintendo" style="max-height: 25px;">
+                        <p>Nintendo</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nintendo_Switch_Logo.svg/2560px-Nintendo_Switch_Logo.svg.png" alt="Switch" style="max-height: 25px;">
+                        <p>Switch</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Steam_Logo.png/800px-Steam_Logo.png" alt="Steam" style="max-height: 20px;">
+                        <p>Steam Deck</p>
+                    </div>
+                    <div class="brand-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Oculus_Quest_2_Logo.svg/2560px-Oculus_Quest_2_Logo.svg.png" alt="Oculus" style="max-height: 20px;">
+                        <p>Oculus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Pricing tabs functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const pricingGrids = document.querySelectorAll('.pricing-grid');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and grids
+                tabBtns.forEach(b => b.classList.remove('active'));
+                pricingGrids.forEach(grid => grid.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding grid
+                const tabId = btn.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Create animated circuit nodes
+        const circuitNodes = document.getElementById('circuitNodes');
+        
+        function createCircuitNodes() {
+            // Clear existing nodes
+            circuitNodes.innerHTML = '';
+            
+            // Create circuit nodes
+            for (let i = 0; i < 30; i++) {
+                const node = document.createElement('div');
+                node.classList.add('circuit-node');
+                node.style.left = `${Math.random() * 100}%`;
+                node.style.top = `${Math.random() * 100}%`;
+                node.style.width = `${5 + Math.random() * 8}px`;
+                node.style.height = node.style.width;
+                node.style.animationDelay = `${Math.random() * 4}s`;
+                circuitNodes.appendChild(node);
+            }
+        }
+        
+        // Initialize circuit nodes
+        createCircuitNodes();
+        
+        // Recreate nodes on resize
+        window.addEventListener('resize', createCircuitNodes);
+    </script>
+</body>
+</html>

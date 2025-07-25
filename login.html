@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH SMART | Login</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d; /* Futuristic teal */
+            --secondary: #0a0a0a; /* Darker black */
+            --accent: #00b4ff; /* Electric blue */
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        /* Animated Circuit Paths */
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* High-Tech Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Auth Section */
+        .auth-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(18, 18, 18, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            box-shadow: var(--neon-glow);
+            backdrop-filter: blur(5px);
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1.2rem;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-tab.active {
+            color: var(--primary);
+            text-shadow: var(--neon-glow);
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .auth-form {
+            padding: 2.5rem;
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .social-btn i {
+            font-size: 1.2rem;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .social-btn.fb {
+            background: #3b5998;
+            color: white;
+        }
+
+        .social-btn.google {
+            background: white;
+            color: #333;
+        }
+
+        .divider {
+            position: relative;
+            margin: 1.5rem 0;
+            text-align: center;
+            color: rgba(248, 248, 248, 0.7);
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 255, 157, 0.3);
+            z-index: -1;
+        }
+
+        .divider span {
+            background: var(--dark);
+            padding: 0 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-radius: 5px;
+            color: var(--light);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(248, 248, 248, 0.5);
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            margin-top: 0.5rem;
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-link:hover {
+            color: var(--accent);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--dark);
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        .checkbox label {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--light);
+        }
+
+        .checkbox a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .auth-container {
+                max-width: 100%;
+            }
+            
+            .auth-tab {
+                padding: 1rem 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .auth-form {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-section {
+                padding: 5rem 1rem 1rem;
+            }
+            
+            .auth-tabs {
+                flex-direction: column;
+            }
+            
+            .auth-tab.active::after {
+                bottom: 0;
+                left: 50%;
+                width: 3px;
+                height: 100%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">EMOTECH</div>
+            <a href="index.html" class="btn">BACK TO HOME</a>
+        </div>
+    </header>
+
+    <!-- Auth Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">LOGIN</button>
+                <button class="auth-tab" data-tab="register">REGISTER</button>
+            </div>
+            
+            <div class="auth-form active" id="login-form">
+                <div class="social-login">
+                    <button class="social-btn fb">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </button>
+                    <button class="social-btn google">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                </div>
+                
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password" required>
+                        <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn">LOGIN</button>
+                </form>
+            </div>
+            
+            <div class="auth-form" id="register-form">
+                <form>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" class="btn">CREATE ACCOUNT</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 EMOTECH SMART. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.auth-tab');
+        const forms = document.querySelectorAll('.auth-form');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and forms
+                tabs.forEach(t => t.classList.remove('active'));
+                forms.forEach(f => f.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding form
+                tab.classList.add('active');
+                const formId = `${tab.dataset.tab}-form`;
+                document.getElementById(formId).classList.add('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

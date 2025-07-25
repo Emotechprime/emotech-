@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH Browser</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d;
+            --secondary: #0a0a0a;
+            --accent: #00b4ff;
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+            --browser-chrome: #1e1e1e;
+            --tab-active: #2a2a2a;
+            --tab-inactive: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Browser Window Styles */
+        .browser-window {
+            width: 90%;
+            max-width: 1200px;
+            height: 70vh;
+            margin: 5rem auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: var(--browser-chrome);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .browser-header {
+            background: var(--browser-chrome);
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.2);
+        }
+
+        .browser-controls {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close-btn { background: #ff5f56; }
+        .minimize-btn { background: #ffbd2e; }
+        .maximize-btn { background: #27c93f; }
+
+        .address-bar {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            color: var(--light);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .address-bar:hover {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .address-bar i {
+            color: var(--primary);
+            margin-right: 0.7rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .browser-tabs {
+            display: flex;
+            background: var(--browser-chrome);
+            padding-left: 1rem;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background: var(--tab-inactive);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px 8px 0 0;
+            margin-right: 0.3rem;
+            font-size: 0.9rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: var(--tab-active);
+            color: var(--light);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .browser-content {
+            flex-grow: 1;
+            background: var(--tab-active);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #browserFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            z-index: 10;
+        }
+
+        .loading-spinner {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animated Circuit Nodes */
+        .circuit-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0;
+            animation: nodeFade 4s infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes nodeFade {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .browser-window {
+                width: 95%;
+                margin: 3rem auto;
+                height: 60vh;
+            }
+            
+            .browser-tabs {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .browser-header {
+                padding: 0.6rem;
+            }
+            
+            .address-bar {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Animated Circuit Nodes -->
+    <div id="circuitNodes"></div>
+
+    <!-- Browser Window -->
+    <div class="browser-window">
+        <div class="browser-header">
+            <div class="address-bar" id="addressBar">
+                <i class="fas fa-lock"></i>
+                <span id="urlDisplay">https://modyolo.com/</span>
+            </div>
+            <button class="nav-btn" id="goBtn"><i class="fas fa-arrow-right"></i></button>
+            <button class="nav-btn" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
+        </div>
+        
+        <div class="browser-tabs">
+            <div class="tab active">MODYOLO</div>
+        </div>
+        
+        <div class="browser-content">
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner">
+                    <i class="fas fa-circle-notch"></i>
+                </div>
+                <p>Loading Modyolo...</p>
+            </div>
+            <iframe id="browserFrame" src="about:blank"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const addressBar = document.getElementById('addressBar');
+        const urlDisplay = document.getElementById('urlDisplay');
+        const browserFrame = document.getElementById('browserFrame');
+        const goBtn = document.getElementById('goBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const tabs = document.querySelectorAll('.tab');
+        
+        // Default URL
+        const defaultUrl = 'https://modyolo.com/';
+        
+        // Load APKPure when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            loadUrl(defaultUrl);
+            createCircuitNodes();
+        });
+        
+        // Handle Go button click
+        goBtn.addEventListener('click', () => {
+            loadUrl(defaultUrl);
+        });
+        
+        // Handle Refresh button click
+        refreshBtn.addEventListener('click', () => {
+            browserFrame.contentWindow.location.reload();
+            showLoading();
+        });
+        
+        // Handle address bar click
+        addressBar.addEventListener('click', () => {
+            loadUrl(defaultUrl);
+        });
+        
+        // Tab functionality
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                if (tab.textContent === 'APKPure') {
+                    loadUrl(defaultUrl);
+                } else {
+                    // Load your EMOTECH tools page
+                    browserFrame.src = 'about:blank';
+                    loadingOverlay.innerHTML = `
+                        <div class="loading-spinner">
+                            <i class="fas fa-circle-notch"></i>
+                        </div>
+                        <p>EMOTECH Tools Loading...</p>
+                    `;
+                    showLoading();
+                    // Here you would load your EMOTECH tools interface
+                }
+            });
+        });
+        
+        // Function to load URL
+        function loadUrl(url) {
+            showLoading();
+            urlDisplay.textContent = url;
+            
+            setTimeout(() => {
+                browserFrame.src = url;
+                
+                browserFrame.addEventListener('load', () => {
+                    hideLoading();
+                }, { once: true });
+            }, 500);
+        }
+        
+        function showLoading() {
+            loadingOverlay.style.display = 'flex';
+        }
+        
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+        }
+        
+        // Circuit nodes animation
+        function createCircuitNodes() {
+            const circuitNodes = document.getElementById('circuitNodes');
+            circuitNodes.innerHTML = '';
+            
+            for (let i = 0; i < 30; i++) {
+                const node = document.createElement('div');
+                node.classList.add('circuit-node');
+                node.style.left = `${Math.random() * 100}%`;
+                node.style.top = `${Math.random() * 100}%`;
+                node.style.width = `${5 + Math.random() * 8}px`;
+                node.style.height = node.style.width;
+                node.style.animationDelay = `${Math.random() * 4}s`;
+                circuitNodes.appendChild(node);
+            }
+        }
+        
+        window.addEventListener('resize', createCircuitNodes);
+        
+        // Simulate browser controls (cosmetic only)
+        document.querySelector('.close-btn').addEventListener('click', () => {
+            alert('Close window action would go here');
+        });
+        
+        document.querySelector('.minimize-btn').addEventListener('click', () => {
+            alert('Minimize window action would go here');
+        });
+        
+        document.querySelector('.maximize-btn').addEventListener('click', () => {
+            alert('Maximize window action would go here');
+        });
+    </script>
+</body>
+</html>

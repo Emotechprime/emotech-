@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH SMART | Organized Apps</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d; /* Futuristic teal */
+            --secondary: #0a0a0a; /* Darker black */
+            --accent: #00b4ff; /* Electric blue */
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        /* Animated Circuit Paths */
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* High-Tech Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.05);
+            color: var(--light);
+            outline: none;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+            width: 250px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--secondary);
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Apps Hero Section */
+        .apps-hero {
+            padding: 180px 5% 80px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apps-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .apps-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .apps-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .apps-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Apps Content */
+        .apps-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        /* Apps Organization */
+        .apps-organization {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* Sidebar Navigation */
+        .apps-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 0.7rem 1rem;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-menu a.active::before {
+            transform: scaleY(1);
+        }
+
+        .sidebar-menu i {
+            margin-right: 0.7rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Apps Main Content */
+        .apps-main {
+            flex-grow: 1;
+        }
+
+        .apps-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* App Cards Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .app-card {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .app-image {
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .app-card:hover .app-image img {
+            transform: scale(1.05);
+        }
+
+        .app-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-new {
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .badge-update {
+            color: #ffb400;
+            border: 1px solid #ffb400;
+        }
+
+        .badge-beta {
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+        }
+
+        .app-content {
+            padding: 1.5rem;
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .app-description {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .app-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .app-version {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .app-size {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .app-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .app-actions .btn {
+            flex-grow: 1;
+            text-align: center;
+            padding: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        /* Recently Updated Section */
+        .recently-updated {
+            background: rgba(0, 180, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 180, 255, 0.3);
+        }
+
+        .recently-updated h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .update-list {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .update-item {
+            min-width: 200px;
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+        }
+
+        .update-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .update-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .apps-header h1 {
+                font-size: 3rem;
+            }
+            
+            .apps-organization {
+                flex-direction: column;
+            }
+            
+            .apps-sidebar {
+                width: 100%;
+            }
+            
+            .sidebar-menu {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .sidebar-menu li {
+                margin-bottom: 0;
+            }
+            
+            .sidebar-menu a {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--primary);
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .apps-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .apps-header h1 {
+                font-size: 2rem;
+            }
+            
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-actions {
+                flex-direction: column;
+            }
+        }
+        .youtube-link {
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.youtube-link:hover {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.youtube-icon {
+  color: #ff0000;
+  font-size: 1.2rem;
+  margin-right: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.youtube-link:hover .youtube-icon {
+  transform: scale(1.2);
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
+.youtube-text {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">EMOTECH</div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+            </div>
+            
+            <div class="nav-cta">
+                <a href="login.html" class="btn">LOGIN</a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Apps Hero Section -->
+    <section class="apps-hero">
+        <div class="apps-header">
+            <h1>ORGANIZED APP LIBRARY</h1>
+            <p>Browse our comprehensive collection of diagnostic tools, utilities, and firmware organized for your convenience.</p>
+        </div>
+    </section>
+
+    <!-- Apps Content -->
+    <section class="apps-content">
+        <div class="apps-organization">
+            <!-- Sidebar Navigation -->
+<div class="apps-sidebar">
+    <div class="sidebar-section">
+        <h3 class="sidebar-title">CATEGORIES</h3>
+        <ul class="sidebar-menu">
+            <li>
+  <a href="https://www.youtube.com/channel/UCaNIAqAYFw1iAW1YFYpbmkA" class="youtube-link">
+    <i class="fab fa-youtube youtube-icon"></i>
+    <span class="youtube-text">YOUTUBE</span>
+  </a>
+</li>
+            <li><a href="https://firmwarefile.com/"><i class="fas fa-microchip"></i> Firmware</a></li>
+            <li><a href="browser.html"><i class="fas fa-mobile-alt"></i> Mobile App</a></li>
+            <li><a href="drivers.html"><i class="fas fa-plug"></i> Drivers</a></li>
+            <li><a href="utilities.html"><i class="fas fa-cogs"></i> Utilities</a></li>
+            <li><a href="security.html"><i class="fas fa-shield-alt"></i> Security</a></li>
+        </ul>
+    </div>
+    
+    <div class="sidebar-section">
+        <h3 class="sidebar-title">FILTERS</h3>
+        <ul class="sidebar-menu">
+            <li><a href="featured.html"><i class="fas fa-star"></i> Featured</a></li>
+            <li><a href="new-releases.html"><i class="fas fa-bolt"></i> New Releases</a></li>
+            <li><a href="recent-updates.html"><i class="fas fa-sync-alt"></i> Recently Updated</a></li>
+            <li><a href="beta-programs.html"><i class="fas fa-flask"></i> Beta Programs</a></li>
+        </ul>
+    </div>
+    
+    <div class="sidebar-section">
+        <h3 class="sidebar-title">PLATFORMS</h3>
+        <ul class="sidebar-menu">
+            <li><a href="windows-tools.html"><i class="fab fa-windows"></i> Windows</a></li>
+            <li><a href="macos-tools.html"><i class="fab fa-apple"></i> macOS</a></li>
+            <li><a href="android-tools.html"><i class="fab fa-android"></i> Android</a></li>
+            <li><a href="ios-tools.html"><i class="fab fa-app-store-ios"></i> iOS</a></li>
+            <li><a href="linux-tools.html"><i class="fab fa-linux"></i> Linux</a></li>
+        </ul>
+    </div>
+</div>
+            
+            <!-- Main Content Area -->
+            <div class="apps-main">
+                <!-- Recently Updated Section -->
+                <div class="recently-updated">
+                    <h3>RECENTLY UPDATED</h3>
+                    <div class="update-list">
+                        <div class="update-item">
+                            <h4>Diagnostic Suite v3.2</h4>
+                            <p>Added new device profiles</p>
+                            <div class="update-meta">
+                                <span>Jun 15, 2023</span>
+                                <span>45.7 MB</span>
+                            </div>
+                        </div>
+                        <div class="update-item">
+                            <h4>Battery Analyzer v2.1</h4>
+                            <p>Improved accuracy</p>
+                            <div class="update-meta">
+                                <span>Jun 10, 2023</span>
+                                <span>18.4 MB</span>
+                            </div>
+                        </div>
+                        <div class="update-item">
+                            <h4>Mobile Companion v1.3</h4>
+                            <p>Bug fixes</p>
+                            <div class="update-meta">
+                                <span>Jun 5, 2023</span>
+                                <span>Varies</span>
+                            </div>
+                        </div>
+                        <div class="update-item">
+                            <h4>Port Tester v1.4</h4>
+                            <p>New USB-C tests</p>
+                            <div class="update-meta">
+                                <span>May 28, 2023</span>
+                                <span>9.8 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diagnostic Tools Section -->
+                <div class="apps-section">
+                    <div class="section-header">
+                        <h2 class="section-title">DIAGNOSTIC TOOLS</h2>
+                        <div class="section-actions">
+                            <a href="#" class="btn-secondary">View All</a>
+                        </div>
+                    </div>
+                    
+                    <div class="apps-grid">
+                        <!-- App Card 1 -->
+                        <div class="app-card">
+                            <div class="app-image">
+                                <img src="https://getmodsapk.com/storage/media/2025/4/accu-battery-mod-apk.webp" alt="Battery Analyzer">
+                                <span class="app-badge badge-new">NEW</span>
+                            </div>
+                            <div class="app-content">
+                                <h3 class="app-title">Battery Analyzer Pro</h3>
+                                <p class="app-description">
+                                    Advanced battery health monitoring with predictive failure analysis.
+                                </p>
+                                <div class="app-meta">
+                                    <span class="app-version"><i class="fas fa-code-branch"></i> v2.1.5</span>
+                                    <span class="app-size"><i class="fas fa-database"></i> 19.8 MB</span>
+                                </div>
+                                <div class="app-actions">
+                                    <a href="https://getmodsapk.com/dl-track/accubattery-mod-apk/21478" class="btn">DOWNLOAD</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- App Card 2 -->
+                        <div class="app-card">
+                            <div class="app-image">
+                                <img src="https://i.git99.com/upload/android/icon/2025/01/21/cdc25ce8f7deafaa8f78b552e059be05.webp" alt="Screen Calibrator">
+                                <span class="app-badge badge-update">UPDATE</span>
+                            </div>
+                            <div class="app-content">
+                                <h3 class="app-title">Screen Calibrator</h3>
+                                <p class="app-description">
+                                    Professional display calibration tool with color accuracy testing.
+                                </p>
+                                <div class="app-meta">
+                                    <span class="app-version"><i class="fas fa-code-branch"></i> v1.7.3</span>
+                                    <span class="app-size"><i class="fas fa-database"></i> 4.7 MB</span>
+                                </div>
+                                <div class="app-actions">
+                                    <a href="https://apk.dog/go.php?file_id=2797391&b=aHR0cHM6Ly8wNC5hcGsuZG9nL3N0b3JhZ2UvMTQvOTcyLzcyOS85NzI3MjkvYXJtNjRfdjhhLWFybWVhYmlfdjdhLXg4Ni14ODZfNjQvZWE0NWM2NzkzNzE0MTBhMDFlZmY2Nzg2ZGRmZmQ1MDAvVG91Y2hfU2NyZWVuX1JlcGFpcl9fQ2FsaWJyYXRpb24tNS4wLmFwaz9zPW1DalBfSkc1OVdIYmU0RWRSUnJudHcmZT0xNzUzNDg4NzIwJmxhbmc9ZW4mYXBrX2lkPTc4Mjg1MiZwcmVtaXVtX3NwZWVkPTA=" class="btn">DOWNLOAD</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        </div>
+                    </div>
+                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </script>
+    <script>
+    // Set active class based on current page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get current page filename
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        // Find all navigation links
+        const navLinks = document.querySelectorAll('.sidebar-menu a');
+        
+        // Check each link and set active class if it matches current page
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+                
+                // Remove active class from any other links (just in case)
+                navLinks.forEach(otherLink => {
+                    if (otherLink !== link) {
+                        otherLink.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Add click handler to smoothly transition between pages
+            link.addEventListener('click', function(e) {
+                // Only prevent default if it's not an external link
+                if (!this.href.includes('http') && !this.href.includes('://')) {
+                    e.preventDefault();
+                    
+                    // Add loading animation
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                    
+                    // Simulate page transition (remove in production)
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 500);
+                }
+            });
+        });
+    });
+
+    // Circuit node animation (from your original code)
+    const circuitNodes = document.getElementById('circuitNodes');
+    
+    function createCircuitNodes() {
+        circuitNodes.innerHTML = '';
+        for (let i = 0; i < 30; i++) {
+            const node = document.createElement('div');
+            node.classList.add('circuit-node');
+            node.style.left = `${Math.random() * 100}%`;
+            node.style.top = `${Math.random() * 100}%`;
+            node.style.width = `${5 + Math.random() * 8}px`;
+            node.style.height = node.style.width;
+            node.style.animationDelay = `${Math.random() * 4}s`;
+            circuitNodes.appendChild(node);
+        }
+    }
+    
+    createCircuitNodes();
+    window.addEventListener('resize', createCircuitNodes);
+</script>
+</body>
+</html>

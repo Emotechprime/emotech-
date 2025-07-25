@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH SMART | Contact & Locations</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d; /* Futuristic teal */
+            --secondary: #0a0a0a; /* Darker black */
+            --accent: #00b4ff; /* Electric blue */
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        /* Animated Circuit Paths */
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* High-Tech Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.05);
+            color: var(--light);
+            outline: none;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+            width: 250px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--secondary);
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Contact Hero Section */
+        .contact-hero {
+            padding: 180px 5% 80px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .contact-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Content */
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .contact-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .contact-card p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            margin-top: 3rem;
+        }
+
+        .form-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.05);
+            color: var(--light);
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        /* Locations Map */
+        .locations-map {
+            margin-top: 5rem;
+        }
+
+        .map-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .map-container {
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(30%) contrast(110%) brightness(0.8);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 180, 255, 0.1), rgba(0, 255, 157, 0.1));
+            pointer-events: none;
+        }
+
+        /* Location Cards */
+        .location-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .location-card {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .location-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .location-card p {
+            margin-bottom: 0.8rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .location-card i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        .location-hours {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed rgba(0, 255, 157, 0.3);
+        }
+
+        .location-hours h4 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .location-hours p {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .contact-header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--primary);
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .contact-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-card, .location-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">EMOTECH</div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+            </div>
+            
+            <div class="nav-cta">
+                
+                <a href="login.html" class="btn">LOGIN</a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-header">
+            <h1>CONTACT & LOCATIONS</h1>
+            <p>Connect with our advanced repair specialists. Visit our high-tech facilities or reach out through our quantum communication channels.</p>
+            <a href="#locations" class="btn">VIEW LOCATIONS</a>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Phone Support</h3>
+                <p>24/7 advanced technical assistance</p>
+                <p><a href="tel:+18005551234" class="contact-link">+233547225064</a></p>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email Us</h3>
+                <p>For inquiries and support requests</p>
+                <p><a href="mailto:support@emotech.com" class="contact-link">support@emotech30@gmail.com</a></p>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <h3>Live Chat</h3>
+                <p>Instant connection with our techs</p>
+                <p><a href="https://wa.me/+233547225064" class="btn btn-secondary">START CHAT</a></p>
+            </div>
+        </div>
+        
+        <!-- Locations Section -->
+        <div class="locations-map" id="locations">
+            <h2 class="map-title">OUR LOCATIONS</h2>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d1685.948926548964!2d-1.622777!3d6.685338!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwNDEnMDcuNCJOIDHCsDM3JzIxLjIiVw!5e1!3m2!1sen!2sgh!4v1753380755716!5m2!1sen!2sgh" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-overlay"></div>
+            </div>
+            
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

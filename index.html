@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH SMART | Phone Repairs</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d; /* Futuristic teal */
+            --secondary: #0a0a0a; /* Darker black */
+            --accent: #00b4ff; /* Electric blue */
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        /* Animated Circuit Paths */
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* High-Tech Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.05);
+            color: var(--light);
+            outline: none;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+            width: 250px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--secondary);
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Device Page Styles */
+        .device-hero {
+            padding: 180px 5% 80px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .device-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .device-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .device-title {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .device-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .device-icon i {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .device-name h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(90deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .device-name p {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .device-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .device-stat {
+            background: rgba(0, 180, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .device-stat:hover {
+            background: rgba(0, 180, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: var(--neon-glow);
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .stat-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+        }
+
+        .stat-content p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Device Content */
+        .device-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .content-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Repair Guides Section */
+        .guides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .guide-card {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .guide-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .guide-card:hover .guide-image img {
+            transform: scale(1.1);
+        }
+
+        .guide-difficulty {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .difficulty-easy {
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .difficulty-medium {
+            color: #ffb400;
+            border: 1px solid #ffb400;
+        }
+
+        .difficulty-hard {
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+        }
+
+        .guide-content {
+            padding: 1.5rem;
+        }
+
+        .guide-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .guide-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Parts Section */
+        .parts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .part-card {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .part-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .part-image {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .part-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .part-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .part-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .part-stock {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .part-btn {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Troubleshooting Section */
+        .issues-container {
+            margin-top: 2rem;
+        }
+
+        .issue-item {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .issue-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 157, 0.1);
+        }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .issue-title {
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+
+        .issue-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .issue-item.active .issue-icon {
+            transform: rotate(180deg);
+        }
+
+        .issue-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 0;
+        }
+
+        .issue-item.active .issue-content {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        .issue-solution {
+            padding: 1rem;
+            background: rgba(0, 180, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .device-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .device-stats {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--primary);
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .content-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+
+            .tab-btn {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .device-name h1 {
+                font-size: 2rem;
+            }
+            
+            .device-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .guides-container, .parts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">EMOTECH</div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="organized apps.html">DOWNLOADS</a>
+                <a href="technicians.html">TECHNICIANS</a>
+                <a href="pricing.html">PRICING</a>
+                <a href="contact.html">CONTACT</a>
+            </div>
+            
+            <div class="nav-cta">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search services...">
+                </div>
+                <a href="login.html" class="btn">LOGIN</a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Device Hero Section -->
+    <section class="device-hero">
+        <div class="device-header">
+            <div class="device-title">
+                <div class="device-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="device-name">
+                    <h1>SMARTPHONE REPAIRS</h1>
+                    <p>Advanced repair solutions for all major brands and models</p>
+                </div>
+            </div>
+            
+            <div class="device-stats">
+                <div class="device-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Repairability Score</h3>
+                        <p>8.5/10 (Advanced)</p>
+                    </div>
+                </div>
+                <div class="device-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Average Repair Time</h3>
+                        <p>45-90 minutes</p>
+                    </div>
+                </div>
+                <div class="device-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Warranty</h3>
+                        <p>6 months on all repairs</p>
+                    </div>
+                </div>
+                <div class="device-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-battery-three-quarters"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Common Issues</h3>
+                        <p>Screens, Batteries, Charging Ports</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Device Content -->
+    <section class="device-content">
+        <div class="content-tabs">
+            <button class="tab-btn active" data-tab="guides">Repair Guides</button>
+            <button class="tab-btn" data-tab="parts">Replacement Parts</button>
+            <button class="tab-btn" data-tab="troubleshooting">Troubleshooting</button>
+        </div>
+        
+        <!-- Repair Guides Tab -->
+        <div id="guides" class="tab-content active">
+            <h2>Step-by-Step Repair Guides</h2>
+            <p>Our comprehensive guides walk you through every repair with nano-tech precision. Follow along with high-resolution images and expert tips.</p>
+            
+            <div class="guides-container">
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1583413230174-426a12d5585b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Screen Replacement">
+                        <span class="guide-difficulty difficulty-easy">EASY</span>
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Screen Replacement</h3>
+                        <p>Replace a cracked or malfunctioning display with OEM-quality parts.</p>
+                        <div class="guide-meta">
+                            <span>25 steps</span>
+                            <span class="guide-time"><i class="far fa-clock"></i> 45 min</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1639776739505-1e55563c9938?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Battery Replacement">
+                        <span class="guide-difficulty difficulty-medium">MEDIUM</span>
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Battery Replacement</h3>
+                        <p>Extend your device's life with a fresh high-capacity battery.</p>
+                        <div class="guide-meta">
+                            <span>18 steps</span>
+                            <span class="guide-time"><i class="far fa-clock"></i> 30 min</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1697120166706-f97a116beb6a?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Charging Port Repair">
+                        <span class="guide-difficulty difficulty-hard">HARD</span>
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Charging Port Repair</h3>
+                        <p>Fix charging issues by replacing the USB port assembly.</p>
+                        <div class="guide-meta">
+                            <span>32 steps</span>
+                            <span class="guide-time"><i class="far fa-clock"></i> 75 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Replacement Parts Tab -->
+        <div id="parts" class="tab-content">
+            <h2>Genuine Replacement Parts</h2>
+            <p>High-quality components with our proprietary nano-coating for enhanced durability.</p>
+            
+            <div class="parts-container">
+                <div class="part-card">
+                    <div class="part-image">
+                        <img src="https://s.alicdn.com/@sc04/kf/Hdaaa6fbe66a2441fad3ae82931d17fce1.jpg_720x720q50.jpg" alt="OLED Display">
+                    </div>
+                    <h3 class="part-title">OLED Display Assembly</h3>
+                    <p>Premium OLED screen with touch digitizer and frame</p>
+                    <div class="part-price">GHC 150 to GHC 2500</div>
+                    <div class="part-stock">In stock: 25+</div>
+                    <a href="contact.html" class="btn part-btn">CONTACT ME</a>
+                </div>
+                
+                <div class="part-card">
+                    <div class="part-image">
+                        <img src="https://s.alicdn.com/@sc04/kf/H1ed00ca6dfb74c429bbe95c99ff2ecf9H.jpg_720x720q50.jpg" alt="Battery">
+                    </div>
+                    <h3 class="part-title">High-Capacity Battery</h3>
+                    <p>4200mAh lithium-ion with EMOTECH nano-coating</p>
+                    <div class="part-price">GHC 100 to GHC 250</div>
+                    <div class="part-stock">In stock: 50+</div>
+                    <a href="contact.html" class="btn part-btn">CONTACT ME</a>
+                </div>
+                
+                <div class="part-card">
+                    <div class="part-image">
+                        <img src="https://s.alicdn.com/@sc04/kf/S3d13a19d077641ae962665ebb029eebfl.jpg_720x720q50.jpg" alt="Charging Port">
+                    </div>
+                    <h3 class="part-title">Charging Port</h3>
+                    <p>Reinforced connector with gold-plated contacts</p>
+                    <div class="part-price">GHC 40 to 100</div>
+                    <div class="part-stock">In stock: 15+</div>
+                    <a href="contact.html" class="btn part-btn">CONTACT ME</a>
+                </div>
+                
+                <div class="part-card">
+                    <div class="part-image">
+                        <img src="https://s.alicdn.com/@sc04/kf/H300826693caa494f9aab2f3a7a9e8123l.jpg_720x720q50.jpg" alt="Back Glass">
+                    </div>
+                    <h3 class="part-title">Tempered Back Glass</h3>
+                    <p>OEM-quality with anti-fingerprint coating</p>
+                    <div class="part-price">GHS 50 to 200</div>
+                    <div class="part-stock">In stock: 30+</div>
+                    <a href="contact.html" class="btn part-btn">CONTACT ME</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Troubleshooting Tab -->
+        <div id="troubleshooting" class="tab-content">
+            <h2>Common Issues & Solutions</h2>
+            <p>Diagnose your problem with our expert troubleshooting guides.</p>
+            
+            <div class="issues-container">
+                <div class="issue-item">
+                    <div class="issue-header">
+                        <h3 class="issue-title">Phone won't turn on</h3>
+                        <i class="fas fa-chevron-down issue-icon"></i>
+                    </div>
+                    <div class="issue-content">
+                        <p>If your device is completely unresponsive, try these steps:</p>
+                        <ol>
+                            <li>Connect to a charger for at least 30 minutes</li>
+                            <li>Attempt a force restart (device-specific key combination)</li>
+                            <li>Inspect charging port for debris or damage</li>
+                            <li>Try a different charger and cable</li>
+                        </ol>
+                        <div class="issue-solution">
+                            <strong>Likely solution:</strong> Battery replacement or charging port repair
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="issue-item">
+                    <div class="issue-header">
+                        <h3 class="issue-title">Touch screen not responding</h3>
+                        <i class="fas fa-chevron-down issue-icon"></i>
+                    </div>
+                    <div class="issue-content">
+                        <p>When parts or all of your touch screen stops working:</p>
+                        <ol>
+                            <li>Clean screen with microfiber cloth</li>
+                            <li>Remove any screen protector</li>
+                            <li>Restart device</li>
+                            <li>Check for software updates</li>
+                        </ol>
+                        <div class="issue-solution">
+                            <strong>Likely solution:</strong> Digitizer or full display replacement
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="issue-item">
+                    <div class="issue-header">
+                        <h3 class="issue-title">Rapid battery drain</h3>
+                        <i class="fas fa-chevron-down issue-icon"></i>
+                    </div>
+                    <div class="issue-content">
+                        <p>If your battery life has significantly decreased:</p>
+                        <ol>
+                            <li>Check battery usage in settings</li>
+                            <li>Close background apps</li>
+                            <li>Reduce screen brightness</li>
+                            <li>Disable unnecessary features (GPS, Bluetooth)</li>
+                        </ol>
+                        <div class="issue-solution">
+                            <strong>Likely solution:</strong> Battery replacement if >2 years old
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Accordion functionality for troubleshooting
+        const issueItems = document.querySelectorAll('.issue-item');
+        
+        issueItems.forEach(item => {
+            const header = item.querySelector('.issue-header');
+            
+            header.addEventListener('click', () => {
+                // Close all other items
+                issueItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

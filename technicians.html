@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOTECH SMART | Technicians</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff9d; /* Futuristic teal */
+            --secondary: #0a0a0a; /* Darker black */
+            --accent: #00b4ff; /* Electric blue */
+            --dark: #121212;
+            --light: #f8f8f8;
+            --neon-glow: 0 0 15px rgba(0, 255, 157, 0.7);
+            --circuit-color: rgba(0, 255, 157, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Circuit Board Background */
+        .circuit-board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--circuit-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--circuit-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            opacity: 0.5;
+        }
+
+        /* Animated Circuit Paths */
+        .circuit-path {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--circuit-color) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--circuit-color) 0%, transparent 20%);
+            animation: circuitPulse 8s infinite alternate;
+        }
+
+        @keyframes circuitPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* High-Tech Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.05);
+            color: var(--light);
+            outline: none;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+            width: 250px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--secondary);
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Technicians Hero Section */
+        .technicians-hero {
+            padding: 180px 5% 80px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technicians-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .technicians-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .technicians-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .technicians-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Technicians Section */
+        .technicians-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2 span {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .technicians-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .technician-card {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technician-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .technician-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .technician-card:hover::before {
+            opacity: 1;
+        }
+
+        .technician-image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(0, 255, 157, 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .technician-card:hover .technician-image {
+            border-color: var(--primary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .technician-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .technician-badge {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            white-space: nowrap;
+        }
+
+        .technician-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .specialty {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .bio {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .technician-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 180, 255, 0.1);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 180, 255, 0.3);
+        }
+
+        .technician-actions {
+            margin-top: 1.5rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 10px;
+            padding: 3rem;
+            margin-top: 5rem;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+        }
+
+        .stats-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 180, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .technicians-header h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--primary);
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .technicians-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .technicians-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .technicians-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Board Background -->
+    <div class="circuit-board"></div>
+    <div class="circuit-path"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">EMOTECH</div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="contact.html">CONTACT</a>
+            </div>
+            
+            <div class="nav-cta">
+                <a href="login.html" class="btn">LOGIN</a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Technicians Hero Section -->
+    <section class="technicians-hero">
+        <div class="technicians-header">
+            <h1>OUR TECHNICIAN</h1>
+            <p>Connect with our top-tier repair experts skilled in nano-tech.</p>
+        </div>
+    </section>
+
+    <!-- Technicians Section -->
+    <section class="technicians-section">
+        <div class="section-title">
+            <h2>OUR <span>TECHNICIAN</span></h2>
+            <p>Electronics Repair Specialist</p>
+        </div>
+        
+        <div class="technicians-grid">
+            <!-- Technician 1 -->
+            <div class="technician-card">
+                <div class="technician-image">
+                    <img src="file:///C:/Users/EMOTECH/Desktop/my%20website/emotech.webp" alt="Technician Emmanuel">
+                    <div class="technician-badge">
+                        <i class="fas fa-certificate"></i> Master Technician
+                    </div>
+                </div>
+                <h3>Emmanuel</h3>
+                <p class="specialty">Global Expert</p>
+                <p class="bio">Over a decade of professional experience in component-level repairs with military-grade precision.</p>
+                
+                <div class="technician-skills">
+                    <span class="skill-tag">iPhone Logic Boards</span>
+                    <span class="skill-tag">GPU Reballing</span>
+                    <span class="skill-tag">Data Recovery</span>
+                    <span class="skill-tag">OLED Repair</span>
+                    <span class="skill-tag">Digitizer Replacement</span>
+                    <span class="skill-tag">Water Damage</span>
+                    <span class="skill-tag">NAND Recovery</span>
+                    <span class="skill-tag">Encrypted Devices</span>
+                    <span class="skill-tag">Chip-Off</span>
+                </div>
+                
+            </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h3 class="stats-title">TECHNICIAN STATS</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Devices Repaired</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.7%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Technician card hover effect enhancement
+        document.querySelectorAll('.technician-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const badge = card.querySelector('.technician-badge');
+                if (badge) {
+                    badge.style.transform = 'translateX(-50%) scale(1.1)';
+                    badge.style.boxShadow = '0 0 15px rgba(0, 255, 157, 0.5)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const badge = card.querySelector('.technician-badge');
+                if (badge) {
+                    badge.style.transform = 'translateX(-50%)';
+                    badge.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
